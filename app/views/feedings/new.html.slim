@@ -1,0 +1,18 @@
+div.display-4.mb-4
+  = @date.strftime('%m/%d')
+  span の入力
+= form_with model: @feeding, url: {action: :create}, local: true do |f|
+  div.form-row
+    = f.hidden_field :date, value: @date
+    div.form-group
+      label ペレット
+      = f.fields_for :pellet_weight do |fp|
+        = fp.number_field :gram, class: 'form-control'
+    div.form-group
+      = f.fields_for :body_weight do |fb|
+        label 体重
+        = fb.number_field :gram, class: 'form-control'
+  div.d-flex
+    = link_to '戻る', rabbit_path(@rabbit), class: 'btn btn-default border mr-3'
+    = f.submit class: 'btn btn-primary'
+

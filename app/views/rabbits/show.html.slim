@@ -1,0 +1,25 @@
+div.d-flex.justify-content-between
+  div.display-4 = @rabbit.name
+  span = @rabbit.token
+div
+  = line_chart @rabbit.body_weights.order(:scaled_at).pluck(:scaled_at, :gram), height: '40vw',library: BodyWeight.library_options
+
+div.d-flex.justify-content-between.align-items-end
+  = link_to @date.last_month.strftime('%Y-%m'), rabbit_path(id: @rabbit.id, year: @date.last_month.year, month: @date.last_month.month)
+  div.display-4 = @date.strftime('%Y-%m')
+  = link_to @date.next_month.strftime('%Y-%m'), rabbit_path(id: @rabbit.id, year: @date.next_month.year, month: @date.next_month.month)
+div.d-flex.flex-wrap
+  - (@date.at_beginning_of_month..@date.at_end_of_month).each do |date|
+    div.p-1 style='width: 14.28%'
+      div.border.d-flex.justify-content-center style='height: 4em'
+        = link_to new_rabbit_feeding_path(rabbit_id: @rabbit.id, date: date) do
+          div
+            = date.strftime('%d')
+            - feeding = @rabbit.feeding(date: date.in_time_zone)
+            div.d-flex.justify-content-center
+              div.mr-1
+                = feeding.pellet_weight&.gram ? icon('fas', 'cookie') : ''
+              div
+                = feeding.body_weight&.gram ? icon('fas', 'weight') : ''
+div
+  = link_to '今日の入力', new_rabbit_feeding_path(rabbit_id: @rabbit.id, date: Time.current), class: 'btn btn-primary btn-lg btn-block'

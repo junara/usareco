@@ -1,0 +1,12 @@
+nav.navbar
+  .container
+    .navbar-brand
+      = link_to root_path do
+        = icon('fas', 'paw', class: 'is-size-2')
+        span うされこ
+    .column
+      - if current_user
+        = link_to "ログアウトする", signout_path, id: "sign_out", class: 'is-size-2'
+      - else
+        = link_to "ログインする", "/auth/google_oauth2", id: "sign_in", class: 'is-size-2'
+
