@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :sessions, only: %i(new create destroy)
   resources :home, only: %i(index)
   resources :users, only: %i(show)
-  resources :rabbits, only: %i(show) do
+  resources :rabbits do
     resource :feeding do
     end
   end
