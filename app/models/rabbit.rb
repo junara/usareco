@@ -8,10 +8,11 @@ class Rabbit < ApplicationRecord
   has_many :pellet_weights
   has_many :rabbit_users
   has_many :users, through: :rabbit_users
-
   accepts_nested_attributes_for :body_weights, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :pellet_weights, allow_destroy: true, reject_if: :all_blank
 
+  validates :name, presence: true
+  validates :name, presence: true
   def feeding(attributes = {})
     Feeding.new({ rabbit: self, date: Time.current }.merge(attributes))
   end

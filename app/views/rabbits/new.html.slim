@@ -1,0 +1,5 @@
+= bootstrap_form_with(model: @rabbit, local: true) do |f|
+  = f.text_field :name
+  = f.date_field :welcomed_at
+  = f.collection_select :breed_id, Breed.all, :id, :name
+  = f.submit

@@ -7,14 +7,14 @@ class SessionsController < ApplicationController
     if Rails.env.production?
       if user.persisted? && user.save!
         session[:user_id] = user.id
-        redirect_to user_path(user)
+        redirect_to rabbits_path
       else
         redirect_to root_path
       end
     else
       if user.save!
         session[:user_id] = user.id
-        redirect_to user_path(user)
+        redirect_to rabbits_path
       else
         redirect_to root_path
       end
@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    # raise
     session.delete(:user_id)
     redirect_to root_path
   end

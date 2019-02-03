@@ -1,0 +1,4 @@
+= link_to 'お迎えする', new_rabbit_path, class: 'btn btn-primary'
+div
+  - @rabbits.each do |rabbit|
+    = link_to rabbit.name, rabbit_path(rabbit)

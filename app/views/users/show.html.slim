@@ -1,2 +1,5 @@
-- @rabbits.each do |rabbit|
-  = link_to rabbit.name, rabbit_path(rabbit)
+div
+  = @user.name
+div
+  - @rabbits.each do |rabbit|
+    = link_to rabbit.name, rabbit_path(rabbit)
